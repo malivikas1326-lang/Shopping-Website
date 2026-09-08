@@ -1,40 +1,13 @@
-// ================================
-// ShopEasy - FINAL script.js
-// ================================
-
-// ---------- ADD TO CART ----------
-function addToCart(name, price) {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    cart.push({
-        name: name,
-        price: Number(price)
-    });
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-
-    alert(name + " added to cart!");
-}
-
-
-// ---------- DISPLAY CART ----------
-function displayCart() {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    let box = document.getElementById("cartItems");
-    let totalBox = document.getElementById("total");
-
-    if (!box) return;
-
-    box.innerHTML = "";
-
-    if (cart.length === 0) {
-        box.innerHTML = "<p>Your cart is empty.</p>";
-
-        if (totalBox) {
-            totalBox.innerText = "0";
-        }
-
+function addToCart(name,price){let cart=JSON.parse(localStorage.getItem("cart"))||[];cart.push({name,price});localStorage.setItem("cart",JSON.stringify(cart));alert(name+" added to cart!")}
+function displayCart(){let cart=JSON.parse(localStorage.getItem("cart"))||[],box=document.getElementById("cartItems"),totalEl=document.getElementById("total");if(!box)return;box.innerHTML="";let total=0;if(!cart.length){box.innerHTML="<p>Your cart is empty.</p>";totalEl.innerText="0";return}cart.forEach((item,i)=>{total+=item.price;box.innerHTML+=`<div><strong>${item.name}</strong> - ₹${item.price} <button onclick="removeFromCart(${i})">Remove</button></div>`});totalEl.innerText=total}
+function removeFromCart(i){let cart=JSON.parse(localStorage.getItem("cart"))||[];cart.splice(i,1);localStorage.setItem("cart",JSON.stringify(cart));displayCart()}
+function addWishlist(name){let w=JSON.parse(localStorage.getItem("wishlist"))||[];if(!w.includes(name)){w.push(name);localStorage.setItem("wishlist",JSON.stringify(w));alert(name+" added to wishlist!")}else alert("Already in wishlist!")}
+function displayWishlist(){let w=JSON.parse(localStorage.getItem("wishlist"))||[],box=document.getElementById("wishlistItems");if(!box)return;box.innerHTML=w.length?w.map((x,i)=>`<div>❤️ ${x} <button onclick="removeWishlist(${i})">Remove</button></div>`).join(""):"<p>Your wishlist is empty.</p>"}
+function removeWishlist(i){let w=JSON.parse(localStorage.getItem("wishlist"))||[];w.splice(i,1);localStorage.setItem("wishlist",JSON.stringify(w));displayWishlist()}
+function searchProducts(){let q=document.getElementById("search").value.toLowerCase();document.querySelectorAll("#productList .card").forEach(c=>c.style.display=c.querySelector("h3").innerText.toLowerCase().includes(q)?"block":"none")}
+function loginUser(e){e.preventDefault();alert("Welcome "+document.getElementById("email").value+"!")}
+function contactForm(e){e.preventDefault();alert("Thank you! Your message has been sent.");e.target.reset()}
+function checkout(){let cart=JSON.parse(localStorage.getItem("cart"))||[];if(!cart.length){alert("Your cart is empty!");return}alert("Order placed successfully!");localStorage.removeItem("cart");displayCart()}
         return;
     }
 
