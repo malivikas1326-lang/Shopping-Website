@@ -1,40 +1,250 @@
 // ===============================
-// SHOP EASY - MAIN JAVASCRIPT
+// ShopEasy - Shopping Website JS
 // ===============================
 
-
-// ===============================
-// ADD TO CART
-// ===============================
-
+// ---------- ADD TO CART ----------
 function addToCart(name, price) {
 
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cart = JSON.parse(localStorage.getItem("shopEasyCart")) || [];
 
-    // Check product already exists
-    let existingProduct = cart.find(product => product.name === name);
+    cart.push({
+        name: name,
+        price: Number(price)
+    });
 
-    if (existingProduct) {
-
-        existingProduct.quantity += 1;
-
-    } else {
-
-        cart.push({
-            name: name,
-            price: price,
-            quantity: 1
-        });
-
-    }
-
-    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("shopEasyCart", JSON.stringify(cart));
 
     alert(name + " added to cart! 🛒");
 }
 
 
-// ===============================
+// ---------- DISPLAY CART ----------
+function displayCart() {
+
+    let cart = JSON.parse(localStorage.getItem("shopEasyCart")) || [];
+
+    let cartItems = document.getElementById("cartItems");
+    let total = document.getElementById("total");
+
+    if (!cartItems) {
+        return;
+    }
+
+    cartItems.innerHTML = "";
+
+    let totalPrice = 0;
+
+    if (cart.length === 0) {
+
+        cartItems.innerHTML = "<p>Your cart is empty.</p>";
+
+        if (total) {
+            total.innerText = "0";
+        }
+
+        return;
+    }
+
+    cart.forEach(function(item, index) {
+
+        totalPrice += Number(item.price);
+
+        cartItems.innerHTML += `
+            <div class="cart-item">
+                <h3>${item.name}</h3>
+                <p>Price: ₹${Number(item.price).toLocaleString("en-IN")}</p>
+
+                <button onclick="removeFromCart(${index})">
+                    Remove
+                </button>
+            </div>
+            <hr>
+        `;
+    });
+
+    if (total) {
+        total.innerText = totalPrice.toLocaleString("en-IN");
+    }
+}
+
+
+// ---------- REMOVE FROM CART ----------
+function removeFromCart(index) {
+
+    let cart = JSON.parse(localStorage.getItem("shopEasyCart")) || [];
+
+    cart.splice(index, 1);
+
+    localStorage.setItem("shopEasyCart", JSON.stringify(cart));
+
+    displayCart();
+}
+
+
+// ---------- CHECKOUT ----------
+function checkout() {
+
+    let cart = JSON.parse(localStorage.getItem("shopEasyCart")) || [];
+
+    if (cart.length === 0) {
+
+        alert("Your cart is empty! 🛒");
+
+        return;
+    }
+
+    alert("Order placed successfully! 🎉");
+
+    localStorage.removeItem("shopEasyCart");
+
+    displayCart();
+}
+
+
+// ---------- WISHLIST ----------
+function addWishlist(name) {
+
+    let wishlist =
+        JSON.parse(localStorage.getItem("shopEasyWishlist")) || [];
+
+    if (!wishlist.includes(name)) {
+
+        wishlist.push(name);
+
+        localStorage.setItem(
+            "shopEasyWishlist",
+            JSON.stringify(wishlist)
+        );
+
+        alert(name + " added to wishlist! ❤️");
+
+    } else {
+
+        alert("Already in wishlist! ❤️");
+    }
+}
+
+
+// ---------- DISPLAY WISHLIST ----------
+function displayWishlist() {
+
+    let wishlist =
+        JSON.parse(localStorage.getItem("shopEasyWishlist")) || [];
+
+    let box = document.getElementById("wishlistItems");
+
+    if (!box) {
+        return;
+    }
+
+    box.innerHTML = "";
+
+    if (wishlist.length === 0) {
+
+        box.innerHTML = "<p>Your wishlist is empty.</p>";
+
+        return;
+    }
+
+    wishlist.forEach(function(item, index) {
+
+        box.innerHTML += `
+            <div class="wishlist-item">
+                <h3>❤️ ${item}</h3>
+
+                <button onclick="removeWishlist(${index})">
+                    Remove
+                </button>
+            </div>
+            <hr>
+        `;
+    });
+}
+
+
+// ---------- REMOVE WISHLIST ----------
+function removeWishlist(index) {
+
+    let wishlist =
+        JSON.parse(localStorage.getItem("shopEasyWishlist")) || [];
+
+    wishlist.splice(index, 1);
+
+    localStorage.setItem(
+        "shopEasyWishlist",
+        JSON.stringify(wishlist)
+    );
+
+    displayWishlist();
+}
+
+
+// ---------- SEARCH PRODUCTS ----------
+function searchProducts() {
+
+    let searchBox = document.getElementById("search");
+
+    if (!searchBox) {
+        return;
+    }
+
+    let searchText = searchBox.value.toLowerCase();
+
+    let cards = document.querySelectorAll(
+        "#productList .card"
+    );
+
+    cards.forEach(function(card) {
+
+        let productName =
+            card.querySelector("h3").innerText.toLowerCase();
+
+        if (productName.includes(searchText)) {
+
+            card.style.display = "block";
+
+        } else {
+
+            card.style.display = "none";
+        }
+    });
+}
+
+
+// ---------- LOGIN ----------
+function loginUser(event) {
+
+    event.preventDefault();
+
+    let email = document.getElementById("email");
+
+    if (email) {
+
+        alert("Welcome " + email.value + "!");
+
+    }
+}
+
+
+// ---------- CONTACT ----------
+function contactForm(event) {
+
+    event.preventDefault();
+
+    alert("Thank you! Your message has been sent.");
+
+    event.target.reset();
+}
+
+
+// ---------- AUTO LOAD ----------
+document.addEventListener("DOMContentLoaded", function() {
+
+    displayCart();
+
+    displayWishlist();
+
+});// ===============================
 // SHOW CART
 // ===============================
 
