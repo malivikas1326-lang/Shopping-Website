@@ -1,11 +1,150 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Products - ShopEasy</title><link rel="stylesheet" href="style.css"></head>
-<body><header><h1>🛒 ShopEasy</h1><nav><a href="index.html">Home</a><a href="products.html">Products</a><a href="cart.html">Cart 🛒</a><a href="wishlist.html">Wishlist ❤️</a><a href="login.html">Login</a><a href="contact.html">Contact</a></nav></header>
-<div class="container"><h2>Our Products</h2><input type="text" id="search" placeholder="Search product..." onkeyup="searchProducts()"><div class="products" id="productList">
-<div class="card"><div class="product-img">📱</div><h3>Smart Phone</h3><p>₹15,999</p><button onclick="addToCart('Smart Phone',15999)">Add to Cart</button><button onclick="addWishlist('Smart Phone')">❤️ Wishlist</button></div>
-<div class="card"><div class="product-img">💻</div><h3>Laptop</h3><p>₹49,999</p><button onclick="addToCart('Laptop',49999)">Add to Cart</button><button onclick="addWishlist('Laptop')">❤️ Wishlist</button></div>
-<div class="card"><div class="product-img">🎧</div><h3>Headphones</h3><p>₹1,999</p><button onclick="addToCart('Headphones',1999)">Add to Cart</button><button onclick="addWishlist('Headphones')">❤️ Wishlist</button></div>
-<div class="card"><div class="product-img">⌚</div><h3>Smart Watch</h3><p>₹2,499</p><button onclick="addToCart('Smart Watch',2499)">Add to Cart</button><button onclick="addWishlist('Smart Watch')">❤️ Wishlist</button></div>
-<div class="card"><div class="product-img">👟</div><h3>Sports Shoes</h3><p>₹2,999</p><button onclick="addToCart('Sports Shoes',2999)">Add to Cart</button><button onclick="addWishlist('Sports Shoes')">❤️ Wishlist</button></div>
-<div class="card"><div class="product-img">🎒</div><h3>School Bag</h3><p>₹999</p><button onclick="addToCart('School Bag',999)">Add to Cart</button><button onclick="addWishlist('School Bag')">❤️ Wishlist</button></div>
-</div></div><footer>© 2026 ShopEasy</footer><script src="js/script.js"></script></body></html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Products - ShopEasy</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>🛒 ShopEasy</h1>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="cart.html">Cart 🛒</a>
+        <a href="wishlist.html">Wishlist ❤️</a>
+        <a href="login.html">Login</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+
+<div class="container">
+
+    <h2>Our Products</h2>
+
+    <input
+        type="text"
+        id="search"
+        placeholder="Search product..."
+        onkeyup="searchProducts()"
+    >
+
+    <div class="products" id="productList">
+
+        <!-- Product 1 -->
+        <div class="card">
+            <div class="product-img">📱</div>
+            <h3>Smart Phone</h3>
+            <p>₹15,999</p>
+
+            <button onclick="addToCart('Smart Phone',15999)">
+                🛒 Add to Cart
+            </button>
+
+            <button onclick="addWishlist('Smart Phone',15999)">
+                ❤️ Wishlist
+            </button>
+        </div>
+
+
+        <!-- Product 2 -->
+        <div class="card">
+            <div class="product-img">💻</div>
+            <h3>Laptop</h3>
+            <p>₹49,999</p>
+
+            <button onclick="addToCart('Laptop',49999)">
+                🛒 Add to Cart
+            </button>
+
+            <button onclick="addWishlist('Laptop',49999)">
+                ❤️ Wishlist
+            </button>
+        </div>
+
+
+        <!-- Product 3 -->
+        <div class="card">
+            <div class="product-img">🎧</div>
+            <h3>Headphones</h3>
+            <p>₹1,999</p>
+
+            <button onclick="addToCart('Headphones',1999)">
+                🛒 Add to Cart
+            </button>
+
+            <button onclick="addWishlist('Headphones',1999)">
+                ❤️ Wishlist
+            </button>
+        </div>
+
+
+        <!-- Product 4 -->
+        <div class="card">
+            <div class="product-img">⌚</div>
+            <h3>Smart Watch</h3>
+            <p>₹2,499</p>
+
+            <button onclick="addToCart('Smart Watch',2499)">
+                🛒 Add to Cart
+            </button>
+
+            <button onclick="addWishlist('Smart Watch',2499)">
+                ❤️ Wishlist
+            </button>
+        </div>
+
+
+        <!-- Product 5 -->
+        <div class="card">
+            <div class="product-img">👟</div>
+            <h3>Sports Shoes</h3>
+            <p>₹2,999</p>
+
+            <button onclick="addToCart('Sports Shoes',2999)">
+                🛒 Add to Cart
+            </button>
+
+            <button onclick="addWishlist('Sports Shoes',2999)">
+                ❤️ Wishlist
+            </button>
+        </div>
+
+
+        <!-- Product 6 -->
+        <div class="card">
+            <div class="product-img">🎒</div>
+            <h3>School Bag</h3>
+            <p>₹999</p>
+
+            <button onclick="addToCart('School Bag',999)">
+                🛒 Add to Cart
+            </button>
+
+            <button onclick="addWishlist('School Bag',999)">
+                ❤️ Wishlist
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer>
+    © 2026 ShopEasy
+</footer>
+
+
+<!-- IMPORTANT -->
+<script src="script.js"></script>
+
+</body>
+</html>
